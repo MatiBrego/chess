@@ -1,0 +1,131 @@
+@startuml
+
+'Board Module
+interface Board {
+    movePiece(Coordinate from, Coordinate to): Board
+}
+
+class NormalBoard implements Board {
+    Map<Coordinate, Piece> position
+    StartingPosition startingPosition
+    movePiece(Coordinate from, Coordinate to): Board
+}
+
+class Coordinate {
+    int row
+    int column
+}
+
+interface StartingPositionGenerator {
+    generateStartingPosition(): Map<Coordinate, Piece>
+}
+
+class NormalStartingPosition implements StartingPositionGenerator{
+    getStartingPosition(): Map<Coordinate, Piece>
+}
+
+Board -> Coordinate
+NormalBoard --> StartingPositionGenerator
+NormalBoard --> Piece
+
+'Board Module
+
+'Piece Module
+class Piece {
+    Piece(PieceRule rule): Piece
+    getRule(): PieceRule rule
+    getTeam(): Team
+}
+
+interface PieceRule {
+    validateMove(Move move): Boolean
+}
+
+class Move {
+    Board board
+    Coordinate from
+    Coordinate to
+    Piece piece
+}
+
+class OrientationRule implements PieceRule {
+    OrientationValidator validator
+    PieceRule nextRule
+
+    validateMove(Move move): Boolean
+}
+
+interface OrientationValidator {
+    validateOrientation(Board board, Coordinate from, Coordinate to): Boolean
+}
+
+class HorizontalValidator implements OrientationValidator {
+    validateOrientation(Board board, Coordinate from, Coordinate to): Boolean
+}
+
+class VerticalValidator implements OrientationValidator {
+    validateOrientation(Board board, Coordinate from, Coordinate to): Boolean
+}
+
+class DiagonalValidator implements OrientationValidator {
+    validateOrientation(Board board, Coordinate from, Coordinate to): Boolean
+}
+
+class MoveQuantityRule implements PieceRule {
+    MoveQuantityValidator validator
+    PieceRule nextRule
+
+    validateMove(Move move): Boolean
+}
+
+interface MoveQuantityValidator {
+    validateQuantity(Board board, Coordinate from, Coordinate to): Boolean
+}
+
+class UnlimitedHorizontalMovement implements MoveQuantityValidator {
+    validateQuantity(Board board, Coordinate from, Coordinate to): Boolean
+}
+
+class SinglePositionHorizontalMovement implements MoveQuantityValidator {
+    validateQuantity(Board board, Coordinate from, Coordinate to): Boolean
+}
+
+class ObstacleRule implements PieceRule{
+    ObstacleValidator validator
+    PieceRule nextRule
+
+    validateMove(Move move): Boolean
+}
+
+interface ObstacleValidator {
+    validateObstacle(Board board, Coordinate from, Coordinate to, Team team): Boolean
+}
+
+class CanIgnoreObstaclesValidator implements ObstacleValidator {
+    validateObstacle(Board board, Coordinate from, Coordinate to, Team team): Boolean
+}
+class CannotIgnoreObstaclesValidator implements ObstacleValidator {
+    validateObstacle(Board board, Coordinate from, Coordinate to, Team team): Boolean
+}
+
+Piece --> PieceRule
+PieceRule -> Move
+OrientationRule --> PieceRule
+OrientationRule --> OrientationValidator
+MoveQuantityRule --> PieceRule
+MoveQuantityRule --> MoveQuantityValidator
+ObstacleRule --> PieceRule
+ObstacleRule --> ObstacleValidator
+'Piece Module
+
+'Game Module
+interface Game {
+    Board board
+    Team turn
+    nextMove(Coordinate from, Coordinate to): Boolean
+}
+
+Game --> Board
+'Game Module
+
+@enduml

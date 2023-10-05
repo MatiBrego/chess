@@ -1,0 +1,45 @@
+@startuml
+
+class Board {
+    Map<Coordinates, Square> squares
+    getSquare(Coordinates position):Square
+    movePiece(Coordinates from, Coordinates to):Square
+}
+
+class Square {
+    Piece piece
+    Coordinates position
+    putPiece(Piece p):void
+    getPiece():Piece
+    isEmpty():Bool
+    removePiece():Piece
+}
+
+class Piece {
+    List<MovementRule> m;
+    move(Square from, Square to);
+}
+
+interface MovementRule {
+    validateMove(Square from, Square to):void
+}
+
+class ObstacleMovement implements MovementRule{
+    Board b
+    validateMove()
+}
+
+class Coordinates{
+    Int row
+    Int column
+}
+
+class DiagonalMovement implements MovementRule{}
+class LMovement implements MovementRule{}
+
+ObstacleMove --> Board
+Board o--> Square
+Square *--> Piece
+Piece *--> MovementRule
+
+@enduml
