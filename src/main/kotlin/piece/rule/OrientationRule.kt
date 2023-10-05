@@ -1,8 +1,8 @@
 package piece.rule
 
 import game.Move
-import piece.rule.result.InvalidResult
-import piece.rule.result.ValidationResult
+import result.validation.InvalidResult
+import result.validation.ValidationResult
 import piece.rule.validator.orientation.OrientationValidator
 
 class OrientationRule(
@@ -18,6 +18,6 @@ class OrientationRule(
             }
         }
         // If none of the orientations are valid, return invalid result
-        return InvalidResult("Invalid move orientation for ${move.getPiece().name}")
+        return InvalidResult
     }
 }

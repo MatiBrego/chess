@@ -1,8 +1,8 @@
 package piece.rule
 
 import game.Move
-import piece.rule.result.InvalidResult
-import piece.rule.result.ValidationResult
+import result.validation.InvalidResult
+import result.validation.ValidationResult
 import piece.rule.validator.movequantity.MoveQuantityValidator
 
 class MoveQuantityRule (
@@ -14,6 +14,6 @@ class MoveQuantityRule (
         if (moveQuantityValidator.validateMoveQuantity(move.getBoard(), move.getFrom(), move.getTo())){
             return nextRule.validateMove(move)
         }
-        return InvalidResult("Invalid move quantity for ${move.getPiece().name}")
+        return InvalidResult
     }
 }

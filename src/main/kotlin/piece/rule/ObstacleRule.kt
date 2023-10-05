@@ -1,9 +1,8 @@
 package piece.rule
 
 import game.Move
-import piece.rule.result.InvalidResult
-import piece.rule.result.ValidationResult
-import piece.rule.validator.movequantity.MoveQuantityValidator
+import result.validation.InvalidResult
+import result.validation.ValidationResult
 import piece.rule.validator.obstacle.ObstacleValidator
 
 class ObstacleRule (
@@ -15,7 +14,7 @@ class ObstacleRule (
         override fun validateMove(move: Move): ValidationResult {
             for (validator in obstacleValidators) {
                 if (!validator.validateObstacle(move.getBoard(), move.getFrom(), move.getTo(), move.getPiece().team)) {
-                    return InvalidResult("${move.getPiece().name} has an obstacle for that move")
+                    return InvalidResult
                 }
             }
             return nextRule.validateMove(move)

@@ -1,8 +1,8 @@
 package piece.rule
 
 import game.Move
-import piece.rule.result.ValidResult
-import piece.rule.result.ValidationResult
+import result.validation.ValidResult
+import result.validation.ValidationResult
 
 class EndOfRule : PieceRule {
     override fun validateMove(move: Move): ValidationResult {
