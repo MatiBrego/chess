@@ -25,8 +25,7 @@ class Game(private var board: Board, private val turn: Team) {
             }
 
             ValidResult -> {
-                this.board = board.movePiece(from, to)
-                SuccessfulResult
+                SuccessfulResult(Game(board.movePiece(from, to), Team.WHITE))
             }
         }
     }

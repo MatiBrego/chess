@@ -1,3 +1,5 @@
 package result.move
 
-data object SuccessfulResult: MoveResult {}
+import game.Game
+
+data class SuccessfulResult(val game: Game): MoveResult {}

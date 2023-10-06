@@ -47,6 +47,7 @@ class NormalStartingPosition: StartingPositionGenerator {
         return map
     }
 
+    // TODO: Consider delegating this to a factory class
     private fun createRook(team: Team): Piece{
         return Piece("Rook",
             OrientationRule(
