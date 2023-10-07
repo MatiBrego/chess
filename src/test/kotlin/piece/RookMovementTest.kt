@@ -5,6 +5,7 @@ import result.move.PieceRuleViolationResult
 import result.move.SuccessfulResult
 import util.game.TestGameGenerator
 import util.startingposition.rook.RookInCenter
+import util.startingposition.rook.RookInCenterBlocked
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -97,5 +98,28 @@ class RookMovementTest {
         assertEquals(game.move(rookPosition, Coordinate(7, 7)), PieceRuleViolationResult)
     }
 
+    @Test
+    fun `test invalid rook moves for rook in center with obstacles in all directions`(){
+        val game = gameGenerator.generate(RookInCenterBlocked())
+        val rookPosition = Coordinate(3, 3)
+
+        // Invalid moves along the column (vertical movement)
+        assertEquals(game.move(rookPosition, Coordinate(0,3)), PieceRuleViolationResult)
+        assertEquals(game.move(rookPosition, Coordinate(1,3)), PieceRuleViolationResult)
+        assertEquals(game.move(rookPosition, Coordinate(2,3)), PieceRuleViolationResult)
+        assertEquals(game.move(rookPosition, Coordinate(4,3)), PieceRuleViolationResult)
+        assertEquals(game.move(rookPosition, Coordinate(5,3)), PieceRuleViolationResult)
+        assertEquals(game.move(rookPosition, Coordinate(6,3)), PieceRuleViolationResult)
+        assertEquals(game.move(rookPosition, Coordinate(7,3)), PieceRuleViolationResult)
+
+        // Invalid moves along the row (horizontal movement)
+        assertEquals(game.move(rookPosition, Coordinate(3,0)), PieceRuleViolationResult)
+        assertEquals(game.move(rookPosition, Coordinate(3,1)), PieceRuleViolationResult)
+        assertEquals(game.move(rookPosition, Coordinate(3,2)), PieceRuleViolationResult)
+        assertEquals(game.move(rookPosition, Coordinate(3,4)), PieceRuleViolationResult)
+        assertEquals(game.move(rookPosition, Coordinate(3,5)), PieceRuleViolationResult)
+        assertEquals(game.move(rookPosition, Coordinate(3,6)), PieceRuleViolationResult)
+        assertEquals(game.move(rookPosition, Coordinate(3,7)), PieceRuleViolationResult)
+    }
 
 }
