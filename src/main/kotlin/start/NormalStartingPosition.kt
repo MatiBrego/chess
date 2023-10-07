@@ -14,6 +14,7 @@ import piece.rule.validator.obstacle.HorizontalObstacleValidator
 import piece.rule.validator.obstacle.VerticalObstacleValidator
 import piece.rule.validator.orientation.DiagonalValidator
 import piece.rule.validator.orientation.HorizontalValidator
+import piece.rule.validator.orientation.LValidator
 import piece.rule.validator.orientation.VerticalValidator
 
 class NormalStartingPosition: StartingPositionGenerator {
@@ -29,6 +30,10 @@ class NormalStartingPosition: StartingPositionGenerator {
         map[Coordinate(7, 7)] = createRook(Team.BLACK)
 
         // Knight
+        map[Coordinate(0, 1)] = createKnight(Team.WHITE)
+        map[Coordinate(0, 6)] = createKnight(Team.WHITE)
+        map[Coordinate(7, 1)] = createKnight(Team.BLACK)
+        map[Coordinate(7, 6)] = createKnight(Team.BLACK)
 
         // Bishop
         map[Coordinate(0, 2)] = createBishop(Team.WHITE)
@@ -115,5 +120,17 @@ class NormalStartingPosition: StartingPositionGenerator {
             ,
             team
         )
+    }
+
+    private fun createKnight(team: Team): Piece{
+        return Piece("Knight",
+            OrientationRule(
+                listOf(
+                    LValidator()
+                ),
+                    EndOfRule()
+                    ),
+                team
+            )
     }
 }
