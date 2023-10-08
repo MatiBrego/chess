@@ -9,10 +9,10 @@ class LimitedValidator(
     // TODO: Check if this is right
     override fun validateMoveQuantity(board: Board, from: Coordinate, to: Coordinate): Boolean {
         // Orthogonal Check
-        val horizontalDistance = kotlin.math.abs(from.row - to.row)
-        val verticalDistance = kotlin.math.abs(from.column - to.column)
+        val horizontalDistance = kotlin.math.abs(from.column - to.column)
+        val verticalDistance = kotlin.math.abs(from.row - to.row)
 
-        if (horizontalDistance < maxMoveQuantity || verticalDistance < maxMoveQuantity) {
+        if (horizontalDistance <= maxMoveQuantity && verticalDistance <= maxMoveQuantity) {
             return true
         }
 

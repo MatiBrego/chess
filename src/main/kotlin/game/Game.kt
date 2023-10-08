@@ -2,12 +2,17 @@ package game
 
 import board.Board
 import board.Coordinate
+import piece.Piece
 import piece.Team
 import result.move.*
 import result.validation.InvalidResult
 import result.validation.ValidResult
 
-class Game(private var board: Board, private val turn: Team) {
+class Game(
+    private var board: Board,
+    private val turn: Team,
+    private val histories: Map<Piece, List<Move>>
+) {
     //TODO: Should game be mutable? Or do I need to return a new Game instance each move? Answer: Immutable
 
     fun move(from: Coordinate, to: Coordinate): MoveResult{
@@ -19,13 +24,20 @@ class Game(private var board: Board, private val turn: Team) {
 
         //TODO: Take all of the above validation into a global rules class
 
-        return when(piece.validateMove(this.board, to, from)){
+        val move = Move(this.board, from, to, piece, histories[piece] ?: listOf())
+
+        return when(piece.validateMove(move)){
             InvalidResult -> {
                 PieceRuleViolationResult
             }
 
             ValidResult -> {
-                SuccessfulResult(Game(board.movePiece(from, to), Team.WHITE))
+                val newHistory = histories[piece]?: listOf()
+                SuccessfulResult(
+                    Game(
+                        board.movePiece(from, to),
+                        Team.WHITE,
+                        histories + Pair(piece, newHistory + move)))
             }
         }
     }

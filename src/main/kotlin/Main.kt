@@ -13,7 +13,8 @@ fun main(args: Array<String>) {
 
     val game = Game(
         NormalBoard(startingPosition.generate()),
-        Team.WHITE
+        Team.WHITE,
+        emptyMap()
     )
 
     game.move(Coordinate(0, 0), Coordinate(3, 0))

@@ -8,8 +8,8 @@ import result.validation.ValidationResult
 
 
 data class Piece (val name:String, val pieceRule: PieceRule, val team: Team){
-    fun validateMove(board: Board, to: Coordinate, from: Coordinate): ValidationResult {
-        return this.pieceRule.validateMove(Move(board, from, to, this))
+    fun validateMove(move: Move): ValidationResult {
+        return this.pieceRule.validateMove(move) // TODO: Should piece create the Move object?
     }
 
     override fun toString(): String {

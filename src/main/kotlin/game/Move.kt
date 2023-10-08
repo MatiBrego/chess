@@ -8,7 +8,8 @@ data class Move(
     private val board: Board,
     private val from: Coordinate,
     private val to: Coordinate,
-    private val piece: Piece
+    private val piece: Piece,
+    private val history: List<Move>
 ) {
     fun getBoard(): Board {
         return board
@@ -24,5 +25,9 @@ data class Move(
 
     fun getPiece(): Piece {
         return piece
+    }
+
+    fun getHistory(): List<Move>{
+        return history
     }
 }

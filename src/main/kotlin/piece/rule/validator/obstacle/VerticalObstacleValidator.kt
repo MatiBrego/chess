@@ -4,7 +4,9 @@ import board.Board
 import board.Coordinate
 import piece.Team
 
-class VerticalObstacleValidator: ObstacleValidator {
+class VerticalObstacleValidator(
+    private val isInclusive: Boolean = false
+): ObstacleValidator {
 
     override fun validateObstacle(board: Board, from: Coordinate, to: Coordinate, team: Team): Boolean {
         // Check if move is not vertical
@@ -26,6 +28,6 @@ class VerticalObstacleValidator: ObstacleValidator {
             }
         }
 
-        return true
+        return !(isInclusive && board.getPiece(to) != null) // If is inclusive is set to true, check if the "to" coordinate is occupied
     }
 }

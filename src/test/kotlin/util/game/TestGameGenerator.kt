@@ -7,6 +7,6 @@ import start.StartingPositionGenerator
 
 class TestGameGenerator {
     fun generate(startingPositionGenerator: StartingPositionGenerator): Game {
-        return Game(NormalBoard(startingPositionGenerator.generate()), Team.WHITE)
+        return Game(NormalBoard(startingPositionGenerator.generate()), Team.WHITE, emptyMap())
     }
 }

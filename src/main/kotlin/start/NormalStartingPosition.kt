@@ -1,12 +1,11 @@
 package start
 
 import board.Coordinate
+import piece.DirectionRule
 import piece.Piece
 import piece.Team
-import piece.rule.EndOfRule
-import piece.rule.MoveQuantityRule
-import piece.rule.ObstacleRule
-import piece.rule.OrientationRule
+import piece.rule.*
+import piece.rule.validator.direction.VerticalForwardValidator
 import piece.rule.validator.movequantity.LimitedValidator
 import piece.rule.validator.movequantity.UnlimitedValidator
 import piece.rule.validator.obstacle.DiagonalObstacleValidator
@@ -22,6 +21,10 @@ class NormalStartingPosition: StartingPositionGenerator {
         val map:MutableMap<Coordinate, Piece>  = mutableMapOf()
 
         // Pawn
+        for(i in 0..7){
+            map[Coordinate(1, i)] = createPawn(Team.WHITE)
+            map[Coordinate(6, i)] = createPawn(Team.BLACK)
+        }
 
         // Rook
         map[Coordinate(0, 0)] = createRook(Team.WHITE)
@@ -129,8 +132,40 @@ class NormalStartingPosition: StartingPositionGenerator {
                     LValidator()
                 ),
                     EndOfRule()
-                    ),
-                team
-            )
+            ),
+            team
+        )
+    }
+
+    private fun createPawn(team: Team): Piece{
+        return Piece("Pawn",
+            PawnOrientationRule(
+                DiagonalValidator(),
+                VerticalValidator(),
+                HasEnemyRule(           // Rule chain to be checked if move is diagonal
+                    MoveQuantityRule(
+                        LimitedValidator(1),
+                        EndOfRule()
+                    )
+                ),
+                ObstacleRule(          // Rule chain to be checked if move is vertical
+                    listOf(VerticalObstacleValidator(true)),
+                    DirectionRule(
+                        VerticalForwardValidator(),
+                        IsFirstMoveRule(
+                            MoveQuantityRule(
+                                LimitedValidator(2),
+                                EndOfRule()
+                            ),
+                            MoveQuantityRule(
+                                LimitedValidator(1),
+                                EndOfRule()
+                            )
+                        )
+                    )
+                )
+            ),
+            team
+        )
     }
 }
