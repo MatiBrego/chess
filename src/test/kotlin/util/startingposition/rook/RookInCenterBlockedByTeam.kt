@@ -15,20 +15,21 @@ import piece.rule.validator.orientation.HorizontalValidator
 import piece.rule.validator.orientation.VerticalValidator
 import start.StartingPositionGenerator
 
-class RookInCenterBlocked: StartingPositionGenerator {
+class RookInCenterBlockedByTeam: StartingPositionGenerator {
     override fun generate(): Map<Coordinate, Piece> {
         return mapOf(
             Coordinate(3, 3) to createRook(Team.WHITE),
-            Coordinate(2, 3) to createRook(Team.BLACK),
-            Coordinate(4, 3) to createRook(Team.BLACK),
-            Coordinate(3, 2) to createRook(Team.BLACK),
-            Coordinate(3, 4) to createRook(Team.BLACK)
+            Coordinate(2, 3) to createRook(Team.WHITE),
+            Coordinate(4, 3) to createRook(Team.WHITE),
+            Coordinate(3, 2) to createRook(Team.WHITE),
+            Coordinate(3, 4) to createRook(Team.WHITE)
         )
 
     }
 
-    private fun createRook(team: Team): Piece{
-        return Piece(PieceType.ROOK,
+    private fun createRook(team: Team): Piece {
+        return Piece(
+            PieceType.ROOK,
             OrientationRule(
                 listOf(
                     HorizontalValidator(),

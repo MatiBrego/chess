@@ -3,6 +3,7 @@ package util.startingposition.rook
 import board.Coordinate
 import piece.Piece
 import piece.Team
+import piece.enum.PieceType
 import piece.rule.EndOfRule
 import piece.rule.MoveQuantityRule
 import piece.rule.ObstacleRule
@@ -20,7 +21,7 @@ class RookInCenter: StartingPositionGenerator {
     }
 
     private fun createRook(team: Team): Piece{
-        return Piece("Rook",
+        return Piece(PieceType.ROOK,
             OrientationRule(
                 listOf(
                     HorizontalValidator(),

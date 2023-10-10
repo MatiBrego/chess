@@ -14,18 +14,22 @@ class VerticalObstacleValidator(
             return true
         }
 
-        var currentCoordinate = from
+        var currentCoordinate = if (from.row < to.row){
+            Coordinate(from.row + 1, from.column)
+        }else {
+            Coordinate(from.row - 1, from.column)
+        }
 
         while (currentCoordinate.row != to.row){
+            if (board.getPiece(currentCoordinate) != null){
+                return false
+            }
             currentCoordinate =
                 if (currentCoordinate.row < to.row){
                     Coordinate(currentCoordinate.row + 1, currentCoordinate.column)
                 }else {
                     Coordinate(currentCoordinate.row - 1, currentCoordinate.column)
                 }
-            if (board.getPiece(currentCoordinate) != null){
-                return false
-            }
         }
 
         return !(isInclusive && board.getPiece(to) != null) // If is inclusive is set to true, check if the "to" coordinate is occupied

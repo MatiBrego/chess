@@ -32,4 +32,8 @@ class NormalBoard(
             println()
         }
     }
+
+    override fun getOccupiedPositions(): List<Coordinate> {
+        return positions.keys.toList()
+    }
 }

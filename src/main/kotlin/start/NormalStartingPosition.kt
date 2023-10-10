@@ -4,6 +4,7 @@ import board.Coordinate
 import piece.DirectionRule
 import piece.Piece
 import piece.Team
+import piece.enum.PieceType
 import piece.rule.*
 import piece.rule.validator.direction.VerticalForwardValidator
 import piece.rule.validator.movequantity.LimitedValidator
@@ -57,7 +58,7 @@ class NormalStartingPosition: StartingPositionGenerator {
 
     // TODO: Consider delegating this to a factory class
     private fun createRook(team: Team): Piece{
-        return Piece("Rook",
+        return Piece(PieceType.ROOK,
             OrientationRule(
                 listOf(
                     HorizontalValidator(),
@@ -74,7 +75,7 @@ class NormalStartingPosition: StartingPositionGenerator {
     }
 
     private fun createBishop(team: Team): Piece{
-        return Piece("Bishop",
+        return Piece(PieceType.BISHOP,
             OrientationRule(
                 listOf(
                     DiagonalValidator()
@@ -90,7 +91,7 @@ class NormalStartingPosition: StartingPositionGenerator {
     }
 
     private fun createQueen(team: Team): Piece{
-        return Piece("Queen",
+        return Piece(PieceType.QUEEN,
             OrientationRule(
                 listOf(
                     HorizontalValidator(),
@@ -108,7 +109,7 @@ class NormalStartingPosition: StartingPositionGenerator {
     }
 
     private fun createKing(team: Team): Piece{
-        return Piece("King",
+        return Piece(PieceType.KING,
             OrientationRule(
                 listOf(
                     HorizontalValidator(),
@@ -126,7 +127,7 @@ class NormalStartingPosition: StartingPositionGenerator {
     }
 
     private fun createKnight(team: Team): Piece{
-        return Piece("Knight",
+        return Piece(PieceType.KNIGHT,
             OrientationRule(
                 listOf(
                     LValidator()
@@ -138,7 +139,7 @@ class NormalStartingPosition: StartingPositionGenerator {
     }
 
     private fun createPawn(team: Team): Piece{
-        return Piece("Pawn",
+        return Piece(PieceType.PAWN,
             PawnOrientationRule(
                 DiagonalValidator(),
                 VerticalValidator(),

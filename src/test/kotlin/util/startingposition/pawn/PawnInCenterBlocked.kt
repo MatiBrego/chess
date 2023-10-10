@@ -4,6 +4,7 @@ import board.Coordinate
 import piece.DirectionRule
 import piece.Piece
 import piece.Team
+import piece.enum.PieceType
 import piece.rule.*
 import piece.rule.validator.direction.VerticalForwardValidator
 import piece.rule.validator.movequantity.LimitedValidator
@@ -23,7 +24,7 @@ class PawnInCenterBlocked: StartingPositionGenerator {
     }
 
     private fun createPawn(team: Team): Piece{
-        return Piece("Pawn",
+        return Piece(PieceType.PAWN,
             PawnOrientationRule(
                 DiagonalValidator(),
                 VerticalValidator(),

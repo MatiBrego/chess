@@ -3,6 +3,7 @@ package util.startingposition.bishop
 import board.Coordinate
 import piece.Piece
 import piece.Team
+import piece.enum.PieceType
 import piece.rule.EndOfRule
 import piece.rule.MoveQuantityRule
 import piece.rule.ObstacleRule
@@ -24,7 +25,7 @@ class BishopInCenterBlocked: StartingPositionGenerator {
     }
 
     private fun createBishop(team: Team): Piece{
-        return Piece("Bishop",
+        return Piece(PieceType.BISHOP,
             OrientationRule(
                 listOf(
                     DiagonalValidator()

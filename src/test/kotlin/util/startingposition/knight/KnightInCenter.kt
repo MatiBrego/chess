@@ -3,6 +3,7 @@ package util.startingposition.knight
 import board.Coordinate
 import piece.Piece
 import piece.Team
+import piece.enum.PieceType
 import piece.rule.EndOfRule
 import piece.rule.OrientationRule
 import piece.rule.validator.orientation.LValidator
@@ -16,7 +17,7 @@ class KnightInCenter: StartingPositionGenerator {
     }
 
     private fun createKnight(team: Team): Piece{
-        return Piece("Knight",
+        return Piece(PieceType.KNIGHT,
             OrientationRule(
                 listOf(
                     LValidator()

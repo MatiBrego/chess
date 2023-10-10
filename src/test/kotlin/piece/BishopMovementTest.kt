@@ -16,7 +16,7 @@ class BishopMovementTest {
 
     @Test
     fun `test valid bishop moves for bishop in center without obstacle`() {
-        val game = gameGenerator.generate(BishopInCenter())
+        val game = gameGenerator.generate(BishopInCenter(), emptyList())
         val bishopPosition = Coordinate(3, 3)
 
         // Valid moves along the primary diagonal (from top-left to bottom-right)
@@ -49,7 +49,7 @@ class BishopMovementTest {
 
     @Test
     fun `test invalid bishop moves for bishop in center without obstacle`() {
-        val game = gameGenerator.generate(BishopInCenter())
+        val game = gameGenerator.generate(BishopInCenter(), emptyList())
         val bishopPosition = Coordinate(3, 3)
 
         // Invalid moves for row 0

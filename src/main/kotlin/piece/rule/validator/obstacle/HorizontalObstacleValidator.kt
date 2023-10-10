@@ -12,18 +12,24 @@ class HorizontalObstacleValidator: ObstacleValidator {
             return true
         }
 
-        var currentCoordinate = from
+        var currentCoordinate =
+            if (from.column < to.column){
+                Coordinate(from.row, from.column + 1)
+            }else {
+                Coordinate(from.row, from.column - 1)
+            }
 
         while (currentCoordinate.column != to.column){
+            if (board.getPiece(currentCoordinate) != null){
+                return false
+            }
+
             currentCoordinate =
                 if (currentCoordinate.column < to.column){
                     Coordinate(currentCoordinate.row, currentCoordinate.column + 1)
                 }else {
                     Coordinate(currentCoordinate.row, currentCoordinate.column - 1)
                 }
-            if (board.getPiece(currentCoordinate) != null){
-                return false
-            }
         }
 
         return true

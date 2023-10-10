@@ -106,8 +106,6 @@ class RookMovementTest {
         // Invalid moves along the column (vertical movement)
         assertEquals(game.move(rookPosition, Coordinate(0,3)), PieceRuleViolationResult)
         assertEquals(game.move(rookPosition, Coordinate(1,3)), PieceRuleViolationResult)
-        assertEquals(game.move(rookPosition, Coordinate(2,3)), PieceRuleViolationResult)
-        assertEquals(game.move(rookPosition, Coordinate(4,3)), PieceRuleViolationResult)
         assertEquals(game.move(rookPosition, Coordinate(5,3)), PieceRuleViolationResult)
         assertEquals(game.move(rookPosition, Coordinate(6,3)), PieceRuleViolationResult)
         assertEquals(game.move(rookPosition, Coordinate(7,3)), PieceRuleViolationResult)
@@ -115,11 +113,15 @@ class RookMovementTest {
         // Invalid moves along the row (horizontal movement)
         assertEquals(game.move(rookPosition, Coordinate(3,0)), PieceRuleViolationResult)
         assertEquals(game.move(rookPosition, Coordinate(3,1)), PieceRuleViolationResult)
-        assertEquals(game.move(rookPosition, Coordinate(3,2)), PieceRuleViolationResult)
-        assertEquals(game.move(rookPosition, Coordinate(3,4)), PieceRuleViolationResult)
         assertEquals(game.move(rookPosition, Coordinate(3,5)), PieceRuleViolationResult)
         assertEquals(game.move(rookPosition, Coordinate(3,6)), PieceRuleViolationResult)
         assertEquals(game.move(rookPosition, Coordinate(3,7)), PieceRuleViolationResult)
+
+        // Valid moves (Eating)
+        assertTrue(game.move(rookPosition, Coordinate(2,3)) is SuccessfulResult)
+        assertTrue(game.move(rookPosition, Coordinate(4,3)) is SuccessfulResult)
+        assertTrue(game.move(rookPosition, Coordinate(3,2)) is SuccessfulResult)
+        assertTrue(game.move(rookPosition, Coordinate(3,4)) is SuccessfulResult)
     }
 
 }
