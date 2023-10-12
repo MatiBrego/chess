@@ -18,10 +18,6 @@ class Game(
 ) {
 
     fun move(from: Coordinate, to: Coordinate): MoveResult{
-//        if (this.board.getPiece(to)?.team == this.turn) {
-//            return OccupiedCoordinateResult
-//        }
-//
         val piece = this.board.getPiece(from) ?: return NoPieceInCoordinateResult
 
         val move = Move(this.board, from, to, piece, turn,histories[piece] ?: listOf())
@@ -50,6 +46,11 @@ class Game(
             }
         }
 
+        val nextTurn: Team = when(turn){
+            Team.WHITE -> Team.BLACK
+            Team.BLACK -> Team.WHITE
+        }
+
         return when(piece.validateMove(move)){
             InvalidResult -> {
                 PieceRuleViolationResult
@@ -60,7 +61,7 @@ class Game(
                 SuccessfulResult(
                     Game(
                         board.movePiece(from, to),
-                        Team.WHITE,
+                        nextTurn,
                         histories + Pair(piece, newHistory + move),
                         rules
                     ),
