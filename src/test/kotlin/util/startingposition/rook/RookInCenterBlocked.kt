@@ -1,18 +1,9 @@
 package util.startingposition.rook
 
 import board.Coordinate
+import factory.createRook
 import piece.Piece
 import piece.Team
-import piece.enum.PieceType
-import piece.rule.EndOfRule
-import piece.rule.MoveQuantityRule
-import piece.rule.ObstacleRule
-import piece.rule.OrientationRule
-import piece.rule.validator.movequantity.UnlimitedValidator
-import piece.rule.validator.obstacle.HorizontalObstacleValidator
-import piece.rule.validator.obstacle.VerticalObstacleValidator
-import piece.rule.validator.orientation.HorizontalValidator
-import piece.rule.validator.orientation.VerticalValidator
 import start.StartingPositionGenerator
 
 class RookInCenterBlocked: StartingPositionGenerator {
@@ -25,25 +16,5 @@ class RookInCenterBlocked: StartingPositionGenerator {
             Coordinate(3, 4) to createRook(Team.BLACK)
         )
 
-    }
-
-    private fun createRook(team: Team): Piece{
-        return Piece(PieceType.ROOK,
-            OrientationRule(
-                listOf(
-                    HorizontalValidator(),
-                    VerticalValidator()
-                ),
-                MoveQuantityRule(
-                    UnlimitedValidator(),
-                    ObstacleRule(
-                        listOf(HorizontalObstacleValidator(), VerticalObstacleValidator()),
-                        EndOfRule()
-                    )
-                )
-            )
-            ,
-            team
-        )
     }
 }

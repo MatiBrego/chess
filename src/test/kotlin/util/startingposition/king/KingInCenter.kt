@@ -1,16 +1,15 @@
-package util.startingposition.pawn
+package util.startingposition.king
 
 import board.Coordinate
-import factory.createPawn
+import factory.createKing
 import piece.Piece
 import piece.Team
-import piece.rule.*
 import start.StartingPositionGenerator
 
-class PawnInCenter: StartingPositionGenerator {
+class KingInCenter: StartingPositionGenerator {
     override fun generate(): Map<Coordinate, Piece> {
         return mapOf(
-            Coordinate(3, 3) to createPawn(Team.WHITE)
+            Coordinate(3, 3) to createKing(Team.WHITE)
         )
     }
 }

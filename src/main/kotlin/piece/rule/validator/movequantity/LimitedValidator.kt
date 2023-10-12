@@ -12,16 +12,7 @@ class LimitedValidator(
         val horizontalDistance = kotlin.math.abs(from.column - to.column)
         val verticalDistance = kotlin.math.abs(from.row - to.row)
 
-        if (horizontalDistance <= maxMoveQuantity && verticalDistance <= maxMoveQuantity) {
-            return true
-        }
-
-        // Diagonal Check
-        if (horizontalDistance == verticalDistance) {
-            return true
-        }
-
-        return false
+        return horizontalDistance <= maxMoveQuantity && verticalDistance <= maxMoveQuantity
     }
 
 }
