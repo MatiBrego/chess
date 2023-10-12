@@ -7,7 +7,6 @@ interface Board {
 
 class NormalBoard implements Board {
     Map<Coordinate, Piece> position
-    StartingPosition startingPosition
     movePiece(Coordinate from, Coordinate to): Board
 }
 
@@ -25,7 +24,6 @@ class NormalStartingPosition implements StartingPositionGenerator{
 }
 
 Board -> Coordinate
-NormalBoard --> StartingPositionGenerator
 NormalBoard --> Piece
 
 'Board Module
@@ -122,10 +120,17 @@ ObstacleRule --> ObstacleValidator
 interface Game {
     Board board
     Team turn
+    List<GameRule> gameRules
     nextMove(Coordinate from, Coordinate to): Boolean
 }
 
+interface GameRule {
+    validateRule(move: Move): GameRuleResult
+}
+
 Game --> Board
+Game --> GameRule
+GameRule --> Move
 'Game Module
 
 @enduml
